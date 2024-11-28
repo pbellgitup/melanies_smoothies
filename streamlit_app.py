@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session #Commented out for migration from SiS to SniS.
 from snowflake.snowpark.functions import col
 
 
@@ -15,8 +15,11 @@ st.write(
 name_on_order = st.text_input("Name on Smoothie:")
 st.write("The name on your Smoothie will be: ", name_on_order)
 
+#session = get_active_session() #Commented out for migration from SiS to SniS.
 
-session = get_active_session()
+cnx = st.connectino("snowflake")
+session = cns.session()
+
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
